@@ -28,7 +28,7 @@ output "networkfirewall_firewalls_enabled_analysis_types" {
 }
 output "networkfirewall_firewalls_encryption_configuration" {
   description = "Map of encryption_configuration values across all networkfirewall_firewalls, keyed the same as var.networkfirewall_firewalls"
-  value       = { for k, v in aws_networkfirewall_firewall.networkfirewall_firewalls : k => v.encryption_configuration if v.encryption_configuration != null && length(v.encryption_configuration) > 0 }
+  value       = { for k, v in aws_networkfirewall_firewall.networkfirewall_firewalls : k => one(v.encryption_configuration) if v.encryption_configuration != null && length(v.encryption_configuration) > 0 }
 }
 output "networkfirewall_firewalls_firewall_policy_arn" {
   description = "Map of firewall_policy_arn values across all networkfirewall_firewalls, keyed the same as var.networkfirewall_firewalls"
